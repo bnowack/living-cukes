@@ -1,6 +1,6 @@
 # LivingCukes
 
-[LivingCukes](https://github.com/bnowack/living-doc) is a client-side library for generating Living Documentation.
+[LivingCukes](https://github.com/bnowack/living-cukes) is a client-side library for generating Living Documentation.
 
 The following source documents can be arranged and converted to HTML manuals:
 
