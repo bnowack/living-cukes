@@ -1,0 +1,74 @@
+
+@import "../../app/scss/_theme.scss";
+
+#nav {
+    
+    width: $nav-width;
+    margin: 100px 16px 100px 0;
+    
+    > ul {
+        position: fixed;
+        width: $nav-width;
+        text-align: right;
+        list-style-type: none;
+        padding: 0 20px 0 0;
+        
+        > li {
+            line-height: 2;
+            padding: 0 8px;
+            border-radius: 4px;
+            margin: 4px 0;
+            
+            a {
+                font-family: "Roboto-Light";
+            }
+            
+            &.active {
+                background-color: #fff;
+                
+                a {
+                    font-family: "Roboto";
+                }
+            }
+            
+            &:before {
+                -display: inline-block;
+                -width: 30px;
+                -content: attr(data-section);
+            }
+            
+            &.h3 {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+            
+            &.h4 {
+                font-size: 0.8em;
+            }
+            
+            &.h5 {
+                font-size: 0.7em;
+            }
+            
+        }
+    }
+    
+    > footer {
+        position: fixed;
+        width: $nav-width - 20;
+        text-align: right;
+        bottom: 8px;
+        padding: 8px 0 0 0;
+        font-size: 12px;
+        color: $gray-3;
+        border-top: 1px solid $gray-4;
+        
+        a {
+            padding-left: 16px;
+            background: transparent url("../../app/img/favicon.png") 0 2px no-repeat;
+            background-size: 14px 14px;
+            color: $gray-2;
+            text-decoration: none;
+        }
+    }
+}

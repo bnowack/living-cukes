@@ -1,0 +1,60 @@
+#nav {
+  width: 264px;
+  margin: 100px 16px 100px 0;
+}
+#nav > ul {
+  position: fixed;
+  width: 264px;
+  text-align: right;
+  list-style-type: none;
+  padding: 0 20px 0 0;
+}
+#nav > ul > li {
+  line-height: 2;
+  padding: 0 8px;
+  border-radius: 4px;
+  margin: 4px 0;
+}
+#nav > ul > li a {
+  font-family: "Roboto-Light";
+}
+#nav > ul > li.active {
+  background-color: #fff;
+}
+#nav > ul > li.active a {
+  font-family: "Roboto";
+}
+#nav > ul > li:before {
+  -display: inline-block;
+  -width: 30px;
+  -content: attr(data-section);
+}
+#nav > ul > li.h3 {
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+#nav > ul > li.h4 {
+  font-size: 0.8em;
+}
+#nav > ul > li.h5 {
+  font-size: 0.7em;
+}
+#nav > footer {
+  position: fixed;
+  width: 244px;
+  text-align: right;
+  bottom: 8px;
+  padding: 8px 0 0 0;
+  font-size: 12px;
+  color: #bbb;
+  border-top: 1px solid #ddd;
+}
+#nav > footer a {
+  padding-left: 16px;
+  background: transparent url("../../app/img/favicon.png") 0 2px no-repeat;
+  background-size: 14px 14px;
+  color: #777;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=nav.css.map */

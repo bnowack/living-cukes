@@ -1,0 +1,24 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #6c9578;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+header h1 {
+  color: #fff;
+  font-size: 24px;
+  font-family: "Roboto-Light";
+  font-weight: normal;
+  line-height: 60px;
+  margin: -2px 0 0 0;
+  padding: 0;
+  display: inline-block;
+  padding-left: 40px;
+  background: transparent url("../../app/img/logo.png") center left no-repeat;
+  background-size: 30px;
+}
+
+/*# sourceMappingURL=header.css.map */
