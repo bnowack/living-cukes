@@ -13,9 +13,11 @@ function($) {
     
     var lib = {
         
-        init: function () {
+        init: function (app) {
            this.$header = $('#header');
-           this.$header.find('h1').html(document.title);
+           this.$header.find('h1').empty().append(
+               $('<a/>').attr('href', location.pathname).html(document.title)
+            );
         }
                 
     };
