@@ -73,6 +73,7 @@ function($, utils, template) {
                 var sectionId = $section.data('index') + '.' + (index + 1);
                 $('<li/>')
                     .addClass(tagName)
+                    .data('sectionId', sectionId)
                     .attr('data-section', sectionId)
                     .attr('data-index', $section.data('index'))
                     .append($('<a/>').html(label).attr('href', '#' + sectionId))
@@ -80,8 +81,19 @@ function($, utils, template) {
                     .appendTo($nav)
                 ;
             });
+            this.sortNavItems();
             // activate current page
             this.showActiveSection();
+        },
+        
+        /**
+         * Sorts the (asynchronously injected) nav items
+         */
+        sortNavItems: function () {
+            var $nav = $('#nav ul');
+            $nav.find('> li').sort(function(a, b) {
+                return $(a).data('sectionId') < $(b).data('sectionId') ? -1 : 1;
+            }).appendTo($nav);
         },
         
         /**
