@@ -9,20 +9,27 @@ header {
     height: $header-height;
     background-color: $header-bg-color;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 2;
     
     h1 {
         color: $header-color;
-        font-size: 24px;
+        font-size: 20px;
         font-family: "Roboto-Light";
         font-weight: normal;
         line-height: $header-height;
-        margin: -2px 0 0 0;
+        margin: -1px 0 0 0;
         padding: 0;
         display: inline-block;
         
-        padding-left: $header-height - 20px;
-        background: transparent url("../../app/img/logo.png") center left no-repeat;
-        background-size: $header-height - 30px;
+        padding-left: $header-height - 8px;
+        background: transparent url("../../app/img/logo.png") 0 8px no-repeat;
+        background-size: $header-height - 16px;
+        
+        a {
+            font-family: "Roboto-Light";
+            color: $header-color;
+            text-decoration: none;
+        }
         
     }
 }
