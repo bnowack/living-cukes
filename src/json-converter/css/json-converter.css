@@ -23,6 +23,7 @@
   vertical-align: top;
   line-height: 24px;
   margin: 0;
+  font-weight: normal;
 }
 .doc.json ul > li .heading:before {
   content: attr(data-keyword);
