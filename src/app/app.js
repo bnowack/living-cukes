@@ -21,7 +21,7 @@ function($, layout, mdConverter) {
     
     var app = {
         
-        namespace: 'LivingCukes',
+        namespace: 'living-cukes',
         
         /**
          * Initialises the library
