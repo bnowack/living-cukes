@@ -20,10 +20,10 @@ function($, utils, header, nav, template) {
     
     var lib = {
         
-        init: function () {
+        init: function (app) {
             $('body').append($(template).html());
-            header.init();
-            nav.init();
+            header.init(app);
+            nav.init(app);
             $(window).on('resize', this.onResize);
             $(window).trigger('resize');
         },

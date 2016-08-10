@@ -27,8 +27,8 @@ function($, layout, mdConverter) {
          * Initialises the library
          */ 
         init: function() {
-            layout.init();
             this.convertSections();
+            layout.init(this);
         },
         
         /**

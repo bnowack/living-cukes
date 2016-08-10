@@ -17,7 +17,10 @@ function($, utils, template) {
     
     var lib = {
         
-        init: function () {
+        namespace: null,
+        
+        init: function (app) {
+            this.namespace = app.namespace + '.nav';
             $('#nav').append($(template).html());
             utils.on('converted.section.' + window.livingCukes.namespace, this.onSectionConverted, this);
             $(window).on('scroll resize', this.onScroll);
@@ -68,7 +71,7 @@ function($, utils, template) {
                         }
                     }
                 });
-            }, 'nav.onScroll.' + window.livingCukes.namespace);
+            }, 'nav.onScroll.' + this.namespace);
         }
                 
     };
