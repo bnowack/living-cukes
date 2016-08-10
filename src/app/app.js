@@ -27,30 +27,30 @@ function($, layout, mdConverter) {
          * Initialises the library
          */ 
         init: function() {
-            this.convertSections();
             layout.init(this);
+            this.convertDocs();
         },
         
         /**
-         * Converts all section references to living documentation
+         * Converts all doc links to living documentation
          */
-        convertSections: function() {
-			$('section').each(function(index) {
-                app.convertSection($(this), index);
+        convertDocs: function() {
+			$('body > a').each(function(index) {
+                app.convertDoc($(this), index + 1);
 			});
         },
         
         /**
-         * Converts a prepared section to living documentation
+         * Converts a doc link to living documentation
          * 
-         * @param {HTMLElement} $section - Section to be converted
-         * @param {number} index - Section position in the page
+         * @param {HTMLElement} $link - Link to be converted
+         * @param {number} index - Doc position in the page
          */
-        convertSection: function($section, index) {
-            var url = $section.text();
+        convertDoc: function($link, index) {
+            var url = $link.prop('href');
             var format = app.getSectionFormat(url);
-            var title = $section.attr('title') || '';
-            $section
+            var title = $link.text() || '';
+            var $section = $('<section/>')
                 .addClass('doc')
                 .data('index', index)
                 .attr('data-index', index)
@@ -58,6 +58,7 @@ function($, layout, mdConverter) {
                 .html(title ? '<h2>' + title + '</h2>' : '')
                 .appendTo('#content')
             ;
+            $link.remove();
             switch (format) {
                 case 'markdown': return mdConverter.convertSection($section);
             }
