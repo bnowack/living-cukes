@@ -4,6 +4,7 @@
  * @author Benjamin Nowack
  * @param {jQuery} $ - jQuery
  * @param {string} template - Module template
+ * @param {Object} utils - Utilities
  */
 define([
     'jquery',
@@ -100,9 +101,11 @@ function($, utils, template) {
          * Shows the currently hash-selected section as the only visible page
          */
         showActiveSection: function () {
-            $('section.doc[data-index="' + this.selectedPageIndex + '"]').fadeIn(500);
+            var $section = $('section.doc[data-index="' + this.selectedPageIndex + '"]');
+            $section.fadeIn(500);
             $('#nav li.h3').hide().filter('[data-index="' + this.selectedPageIndex + '"]').show();
             $('#nav li.h2').removeClass('active').filter('[data-index="' + this.selectedPageIndex + '"]').addClass('active');
+            utils.trigger('shown.section.' + this.namespace, $section);
             // update flags
             $(window).trigger('scroll');
             // scroll to active section
