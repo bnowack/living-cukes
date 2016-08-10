@@ -5,7 +5,6 @@
 #nav > ul {
   position: fixed;
   width: 264px;
-  text-align: right;
   list-style-type: none;
   padding: 0 20px 0 0;
   overflow: auto;
@@ -46,12 +45,7 @@
   font-size: 0.9em;
   line-height: 1.5;
   margin: 4px 0;
-}
-#nav > ul > li.h4 {
-  font-size: 0.8em;
-}
-#nav > ul > li.h5 {
-  font-size: 0.7em;
+  padding-left: 20px;
 }
 #nav > footer {
   position: fixed;

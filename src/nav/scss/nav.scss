@@ -9,7 +9,6 @@
     > ul {
         position: fixed;
         width: $nav-width;
-        text-align: right;
         list-style-type: none;
         padding: 0 20px 0 0;
         overflow: auto;
@@ -57,15 +56,7 @@
                 font-size: 0.9em;
                 line-height: 1.5;
                 margin: 4px 0;
-
-            }
-            
-            &.h4 {
-                font-size: 0.8em;
-            }
-            
-            &.h5 {
-                font-size: 0.7em;
+                padding-left: 20px;
             }
             
         }
