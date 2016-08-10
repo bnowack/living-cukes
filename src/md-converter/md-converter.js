@@ -13,7 +13,24 @@ function(utils, MarkdownConverter) {
     
     var lib = {
         
+        /**
+         * Initializes the component
+         * 
+         * @param {Object} app - Application object
+         */
+        init: function (app) {
+            this.app = app;
+            this.namespace = app.namespace + '.md-converter';
+        },
+        
+        /**
+         * Converts a markdown document
+         * 
+         * @param {jQuery} $section - Section element
+         */
         convertSection: function($section) {
+            var self = this;
+            $section.addClass('markdown');
             var url = $section.data('url');
             utils.load(url, function(markdown) {
                 var html = (new MarkdownConverter()).makeHtml(markdown)
@@ -24,7 +41,7 @@ function(utils, MarkdownConverter) {
                     .replace(/h1>/g, 'h2>')
                 ;
                 $section.append(html);
-                utils.trigger('converted.section.' + window.livingCukes.namespace, $section);
+                utils.trigger('converted.section.' + self.app.namespace, $section);
             });
         }
         

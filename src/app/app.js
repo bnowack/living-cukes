@@ -28,6 +28,7 @@ function($, layout, mdConverter) {
          */ 
         init: function() {
             layout.init(this);
+            mdConverter.init(this);
             this.convertDocs();
         },
         
