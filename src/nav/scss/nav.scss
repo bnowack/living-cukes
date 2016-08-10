@@ -12,23 +12,30 @@
         text-align: right;
         list-style-type: none;
         padding: 0 20px 0 0;
+        overflow: auto;
+        top: 100px;
+        bottom: 50px;
         
         > li {
             line-height: 2;
-            padding: 0 8px;
+            padding: 3px 8px 5px 8px;
             border-radius: 4px;
-            margin: 4px 0;
             
             a {
                 font-family: "Roboto-Light";
+                text-decoration: none;
             }
             
-            &.active {
+            &.active, &.active.first {
                 background-color: #fff;
                 
                 a {
                     font-family: "Roboto";
                 }
+            }
+            
+            &.first {
+                background-color: #eee;
             }
             
             &:before {
@@ -37,9 +44,20 @@
                 -content: attr(data-section);
             }
             
+            &.h2 {
+                margin: 8px 0;
+                font-size: 1.1em;
+                
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+            
             &.h3 {
                 font-size: 0.9em;
                 line-height: 1.5;
+                margin: 4px 0;
+
             }
             
             &.h4 {

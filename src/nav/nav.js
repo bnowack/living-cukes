@@ -19,59 +19,150 @@ function($, utils, template) {
         
         namespace: null,
         
+        selectedPageIndex: 1,
+        
+        /**
+         * Initializes the component
+         * 
+         * @param {Object} app - Application object
+         */
         init: function (app) {
             this.namespace = app.namespace + '.nav';
+            this.selectedPageIndex = this.getPageIndex();
             $('#nav').append($(template).html());
-            utils.on('converted.section.' + window.livingCukes.namespace, this.onSectionConverted, this);
-            $(window).on('scroll resize', this.onScroll);
+            this.initEvents();
+        },
+
+        /**
+         * Inititializes component events
+         */
+        initEvents: function () {
+            var self = this;
+            utils.on('converted.section.' + this.namespace, this.onSectionConverted, this);
+            $(window).on('scroll resize', function () { self.onScroll(); });
+            window.onhashchange = function () { self.onHashChange(); };
+        },
+
+        /**
+         * Returns the index of the currently selected page
+         * 
+         * @returns {Number} Page index (starting with "1")
+         */
+        getPageIndex: function () {
+            if (window.location.hash && window.location.hash.match(/\#([0-9]+)/)) {
+                return parseInt(window.location.hash.replace(/\#([0-9]+).*$/, '$1'));
+            } else {
+                return 1;
+            }
         },
         
+        /**
+         * Adds a nav entry for each heading (h2|h3) in a converted documentation section
+         * 
+         * @param {jQuery.Event} event - Conversion event
+         * @param {HTMLElement} section - Converted section
+         */
         onSectionConverted: function(event, section) {
             var $section = $(section);
+            // extract nav items
             var $nav = $('#nav ul');
-            $section.find('h2, h3, h4, h5').each(function(index) {
+            $section.find('h2, h3').each(function(index) {
                 var $heading = $(this);
-                //$heading.attr('id', 'heading-' + $section.attr('data-index') + '-' + index);
                 var tagName = $heading.prop('tagName').toLowerCase();
                 var label = $heading.text();
+                var sectionId = $section.data('index') + '.' + (index + 1);
                 $('<li/>')
                     .addClass(tagName)
-                    .attr('data-section', ($section.data('index') + 1) + '.' + (index + 1))
+                    .attr('data-section', sectionId)
                     .attr('data-index', $section.data('index'))
-                    .append($('<a/>').html(label))
+                    .append($('<a/>').html(label).attr('href', '#' + sectionId))
                     .data('ref', $heading)
                     .appendTo($nav)
                 ;
             });
-
-            // update flags
-            $(window).trigger('scroll');
+            // activate current page
+            this.showActiveSection();
         },
         
         /**
-         * ScrollSpy
+         * Shows the currently hash-selected section as the only visible page
+         */
+        showActiveSection: function () {
+            $('section.doc[data-index="' + this.selectedPageIndex + '"]').fadeIn(500);
+            $('#nav li.h3').hide().filter('[data-index="' + this.selectedPageIndex + '"]').show();
+            $('#nav li.h2').removeClass('active').filter('[data-index="' + this.selectedPageIndex + '"]').addClass('active');
+            // update flags
+            $(window).trigger('scroll');
+            // scroll to active section
+            this.scrollToActiveSection();
+        },
+        
+        /**
+         * Hides the currently visible page
+         * 
+         * @param {function} callback - Callback after fade-out effect has finished 
+         */
+        hideActiveSection: function (callback) {
+            $('section.doc[data-index="' + this.selectedPageIndex + '"]').fadeOut(250, callback);
+        },
+        
+        /**
+         * Flags the nav item whise section is currently visible in the viewport
          */
         onScroll: function() {
-            utils.debounce(250, function() {
+            var self = this;
+            utils.throttle(250, function() {
                 var $win = $(window);
                 var viewport = {
                     top: $win.scrollTop() + $('#header').outerHeight(),
                     bottom: $win.scrollTop() + $win.height()
                 };
                 var selected = false;
-                $('#nav li').each(function(index) {
-                    var item = $(this);
-                    item.removeClass('active');
-                    if (!selected) {
-                        var $heading = item.data('ref');
+                $('#nav li').each(function() {
+                    var $item = $(this);
+                    $item.removeClass('first');
+                    if (!selected && parseInt($item.attr('data-index')) === self.selectedPageIndex) {
+                        var $heading = $item.data('ref');
                         var pos = $heading.offset();
                         if (pos.top > viewport.top && pos.top < viewport.bottom - $heading.outerHeight()) {
-                            item.addClass('active');
+                            $item.addClass('first');
                             selected = true;
                         }
                     }
                 });
             }, 'nav.onScroll.' + this.namespace);
+        },
+        
+        /**
+         * Triggers a page change or scroll-effect depending on the window's current hash value
+         */
+        onHashChange: function () {
+            var self = this;
+            // page change
+            var newPageIndex = this.getPageIndex();
+            if (newPageIndex !== this.selectedPageIndex) {
+                this.hideActiveSection(function () {
+                    self.selectedPageIndex = newPageIndex;
+                    self.showActiveSection();
+                });
+            } else {
+                this.scrollToActiveSection();
+            }
+        },
+
+        /**
+         * Scrolls the page to the section specified in the window's hash value
+         * 
+         * e.g. #2.4 => scroll to section 4
+         */
+        scrollToActiveSection: function () {
+            var $heading = $('#nav li[data-section="' + location.hash.replace('#', '')+ '"]').data('ref');
+            if ($heading) {
+                var scrollTop = $heading.offset().top - $('#header').outerHeight() - 20;
+                $('html, body').animate({
+                    scrollTop: scrollTop
+                }, 500);
+            }
         }
                 
     };
