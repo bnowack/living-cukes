@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIA,SAAU;EAEN,SAAS,EAAE,IAAI",
+"sources": ["../scss/json-converter.scss"],
+"names": [],
+"file": "json-converter.css"
+}

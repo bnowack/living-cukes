@@ -6,6 +6,8 @@
  * @param {jQuery} $ - jQuery
  * @param {Object} layout - App layout library
  * @param {Object} mdConverter - Converter: from MD
+ * @param {Object} jsonConverter - Converter: from Cucumber JSON
+ * @param {Object} htmlConverter - Converter: from HTML
  */
 require([
     // dependencies
@@ -13,11 +15,13 @@ require([
     // app
     'lcsrc/layout/layout',
     'lcsrc/md-converter/md-converter',
+    'lcsrc/json-converter/json-converter',
+    'lcsrc/html-converter/html-converter',
     // css
     'css!bower_components/normalize-css/normalize',
     'css!lcsrc/app/css/app'
 ], 
-function($, layout, mdConverter) {
+function($, layout, mdConverter, jsonConverter, htmlConverter) {
     
     var app = {
         
@@ -29,6 +33,8 @@ function($, layout, mdConverter) {
         init: function() {
             layout.init(this);
             mdConverter.init(this);
+            jsonConverter.init(this);
+            htmlConverter.init(this);
             this.convertDocs();
         },
         
@@ -62,6 +68,8 @@ function($, layout, mdConverter) {
             $link.remove();
             switch (format) {
                 case 'markdown': return mdConverter.convertSection($section);
+                case 'json': return jsonConverter.convertSection($section);
+                case 'html': return htmlConverter.convertSection($section);
             }
         },
         
