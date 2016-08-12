@@ -12,10 +12,6 @@ The following source documents can be arranged and converted to HTML manuals:
 
 * [Developer Guide](http://bnowack.github.io/living-cukes/documentation.html)
 
-## Credits
-
-LivingCukes uses Google's [Material Design Icons](https://github.com/google/material-design-icons/).
-
 ## License
 
 [The MIT License (MIT)](LICENSE) / Copyright 2016 Benjamin Nowack
