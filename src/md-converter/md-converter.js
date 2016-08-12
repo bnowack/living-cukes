@@ -40,7 +40,12 @@ function(utils, MarkdownConverter) {
                     .replace(/h2>/g, 'h3>')
                     .replace(/h1>/g, 'h2>')
                 ;
+                var hasCustomHeading = !!$section.find('h2').length;
                 $section.append(html);
+                // remove first converted heading if a custom heading was already present in the section
+                if (hasCustomHeading) {
+                    $section.find('h2:nth-child(2)').remove();
+                }
                 utils.trigger('converted.section.' + self.app.namespace, $section);
             });
         }
