@@ -67,6 +67,9 @@ section.doc > a.source {
   font-size: 0.8em;
   float: right;
 }
+section.doc img {
+  max-width: 100%;
+}
 
 code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
