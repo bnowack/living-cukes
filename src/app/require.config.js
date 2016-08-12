@@ -13,7 +13,7 @@ require.config({
     },
     shim: {
         mdconv: {
-          exports: "Markdown.Converter"  
+            exports: "Markdown.Converter"
         },
         prettify: {
             deps: ['css!bower_components/prettify/src/prettify'],

@@ -8,24 +8,24 @@
 define([
     'lcsrc/utils/utils',
     'mdconv'
-], 
+],
 function(utils, MarkdownConverter) {
-    
+
     var lib = {
-        
+
         /**
          * Initializes the component
-         * 
+         *
          * @param {Object} app - Application object
          */
         init: function (app) {
             this.app = app;
             this.namespace = app.namespace + '.md-converter';
         },
-        
+
         /**
          * Converts a markdown document
-         * 
+         *
          * @param {jQuery} $section - Section element
          */
         convertSection: function($section) {
@@ -49,9 +49,9 @@ function(utils, MarkdownConverter) {
                 utils.trigger('converted.section.' + self.app.namespace, $section);
             });
         }
-        
+
     };
-    
+
     return lib;
-    
+
 });
