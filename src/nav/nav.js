@@ -77,6 +77,7 @@ function($, utils, template) {
                     .data('sectionId', sectionId)
                     .attr('data-section', sectionId)
                     .attr('data-index', $section.data('index'))
+                    .attr('data-section-index', index + 1)
                     .append($('<a/>').html(label).attr('href', '#' + sectionId))
                     .data('ref', $heading)
                     .appendTo($nav)
@@ -93,7 +94,22 @@ function($, utils, template) {
         sortNavItems: function () {
             var $nav = $('#nav ul');
             $nav.find('> li').sort(function(a, b) {
-                return $(a).data('sectionId') < $(b).data('sectionId') ? -1 : 1;
+                var $a = $(a);
+                var $b = $(b);
+                var pageIndexA = parseInt($a.attr('data-index'));
+                var pageIndexB = parseInt($b.attr('data-index'));
+                if (pageIndexA < pageIndexB) {
+                    return -1;
+                } else if (pageIndexA > pageIndexB) {
+                    return 1;
+                } else {
+                    var sectionIdA = parseInt($a.attr('data-section-index'));
+                    var sectionIdB = parseInt($b.attr('data-section-index'));
+                    return sectionIdA < sectionIdB
+                        ? -1
+                        : 1
+                    ;
+                }
             }).appendTo($nav);
         },
         
