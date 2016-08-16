@@ -1,6 +1,6 @@
 /**
  * LivingCukes Navigation
- * 
+ *
  * @author Benjamin Nowack
  * @param {jQuery} $ - jQuery
  * @param {string} template - Module template
@@ -15,16 +15,16 @@ define([
     'css!./css/nav'
 ],
 function($, utils, template) {
-    
+
     var lib = {
-        
+
         namespace: null,
-        
+
         selectedPageIndex: 1,
-        
+
         /**
          * Initializes the component
-         * 
+         *
          * @param {Object} app - Application object
          */
         init: function (app) {
@@ -46,7 +46,7 @@ function($, utils, template) {
 
         /**
          * Returns the index of the currently selected page
-         * 
+         *
          * @returns {Number} Page index (starting with "1")
          */
         getPageIndex: function () {
@@ -56,10 +56,10 @@ function($, utils, template) {
                 return 1;
             }
         },
-        
+
         /**
          * Adds a nav entry for each heading (h2|h3) in a converted documentation section
-         * 
+         *
          * @param {jQuery.Event} event - Conversion event
          * @param {HTMLElement} section - Converted section
          */
@@ -87,7 +87,7 @@ function($, utils, template) {
             // activate current page
             this.showActiveSection();
         },
-        
+
         /**
          * Sorts the (asynchronously injected) nav items
          */
@@ -112,7 +112,7 @@ function($, utils, template) {
                 }
             }).appendTo($nav);
         },
-        
+
         /**
          * Shows the currently hash-selected section as the only visible page
          */
@@ -127,16 +127,16 @@ function($, utils, template) {
             // scroll to active section
             this.scrollToActiveSection();
         },
-        
+
         /**
          * Hides the currently visible page
-         * 
-         * @param {function} callback - Callback after fade-out effect has finished 
+         *
+         * @param {function} callback - Callback after fade-out effect has finished
          */
         hideActiveSection: function (callback) {
             $('section.doc[data-index="' + this.selectedPageIndex + '"]').fadeOut(250, callback);
         },
-        
+
         /**
          * Flags the nav item whise section is currently visible in the viewport
          */
@@ -163,7 +163,7 @@ function($, utils, template) {
                 });
             }, 'nav.onScroll.' + this.namespace);
         },
-        
+
         /**
          * Triggers a page change or scroll-effect depending on the window's current hash value
          */
@@ -183,7 +183,7 @@ function($, utils, template) {
 
         /**
          * Scrolls the page to the section specified in the window's hash value
-         * 
+         *
          * e.g. #2.4 => scroll to section 4
          */
         scrollToActiveSection: function () {
@@ -195,9 +195,9 @@ function($, utils, template) {
                 }, 500);
             }
         }
-                
+
     };
-    
+
     return lib;
-    
+
 });
