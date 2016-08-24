@@ -41,6 +41,19 @@ section.doc {
         max-width : 100%;
     }
 
+    img[alt="design"] {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .design-nav {
+        text-align: right;
+        font-size: 0.8em;
+    }
+
+    .design-nav a + a {
+        margin-left: 10px;
+    }
+
 }
 
 code {

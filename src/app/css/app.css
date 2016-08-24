@@ -69,6 +69,16 @@ section.doc > a.source {
 section.doc img {
   max-width: 100%;
 }
+section.doc img[alt="design"] {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+section.doc .design-nav {
+  text-align: right;
+  font-size: 0.8em;
+}
+section.doc .design-nav a + a {
+  margin-left: 10px;
+}
 
 code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
