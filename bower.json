@@ -1,5 +1,6 @@
 {
   "name": "living-cukes",
+  "version": "0.1.8",
   "homepage": "https://github.com/bnowack/living-cukes",
   "authors": [
     "Benjamin Nowack <mail@bnowack.de>"
