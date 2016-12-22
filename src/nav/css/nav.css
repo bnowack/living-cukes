@@ -12,9 +12,9 @@
   bottom: 50px;
 }
 #nav > ul > li {
-  line-height: 2;
-  padding: 3px 8px 5px 8px;
-  border-radius: 4px;
+  line-height: 1.5em;
+  padding: 3px 8px 4px 8px;
+  position: relative;
 }
 #nav > ul > li a {
   font-family: "Roboto-Light";
@@ -29,23 +29,39 @@
 #nav > ul > li.first {
   background-color: #eee;
 }
+#nav > ul > li:hover {
+  background-color: #eee;
+}
 #nav > ul > li:before {
   -display: inline-block;
   -width: 30px;
   -content: attr(data-section);
 }
 #nav > ul > li.h2 {
-  margin: 8px 0;
+  margin: 8px 0 4px 0;
   font-size: 1.1em;
+  padding-left: 28px;
 }
 #nav > ul > li.h2:first-child {
   margin-top: 0;
 }
+#nav > ul > li.h2:before {
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 20px;
+  margin-left: -20px;
+  margin-top: 4px;
+  content: "";
+  background: transparent url(../img/doc-icon.png) 0 0 no-repeat;
+  opacity: 0.8;
+}
 #nav > ul > li.h3 {
   font-size: 0.9em;
   line-height: 1.5;
-  margin: 4px 0;
-  padding-left: 20px;
+  margin: 4px 0 4px 8px;
+  padding-left: 8px;
+  border-left: 2px solid #ddd;
 }
 #nav > footer {
   position: fixed;
