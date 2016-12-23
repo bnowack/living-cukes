@@ -138,7 +138,7 @@ function($, utils, template) {
         },
 
         /**
-         * Flags the nav item whise section is currently visible in the viewport
+         * Flags nav items while their corresponding section is currently visible in the viewport
          */
         onScroll: function() {
             var self = this;
@@ -148,19 +148,31 @@ function($, utils, template) {
                     top: $win.scrollTop() + $('#header').outerHeight(),
                     bottom: $win.scrollTop() + $win.height()
                 };
-                var selected = false;
-                $('#nav li').each(function() {
+                var $navItems = $('#nav li');
+                var $activeItem = null;
+				$navItems.removeClass('first');
+				$navItems.each(function() {
                     var $item = $(this);
-                    $item.removeClass('first');
-                    if (!selected && parseInt($item.attr('data-index')) === self.selectedPageIndex) {
-                        var $heading = $item.data('ref');
-                        var pos = $heading.offset();
-                        if (pos.top > viewport.top && pos.top < viewport.bottom - $heading.outerHeight()) {
-                            $item.addClass('first');
-                            selected = true;
-                        }
+                    if (parseInt($item.attr('data-index')) !== self.selectedPageIndex) {// item from inactive page
+                        return;
+                    }
+                    var $heading = $item.data('ref');
+                    var headingPos = $heading.offset();
+                    var headingTop = headingPos.top;
+                    var headingBottom = headingTop + $heading.outerHeight();
+                    // prefer first heading visible in viewport
+                    if (headingTop >= viewport.top && headingBottom <= viewport.bottom) {// heading fully visible in viewport
+                        $activeItem = $item;
+                        return false;
+                    }
+                    // fall back to last section with visible content
+                    if (headingBottom < viewport.bottom) {
+                        $activeItem = $item;
                     }
                 });
+				if ($activeItem) {
+				    $activeItem.addClass('first');
+                }
             }, 'nav.onScroll.' + this.namespace);
         },
 
